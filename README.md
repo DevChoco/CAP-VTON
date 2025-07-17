@@ -1,5 +1,5 @@
-# LIPF
-> LIPF: Learning Inpainted Pre-Flows in Attention
+# LIPFA
+> LIPFA: Learning Inpainted Pre-Flows in Attention
 
 ## Acknowledgement
 Created by modifying [Leffa](https://github.com/franciszzj/LEFFA).
