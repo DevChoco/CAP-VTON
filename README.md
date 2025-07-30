@@ -1,5 +1,5 @@
-# LIPFA
-> LIPFA: Learning Inpainted Pre-Flows in Attention
+# CAP-VTON
+> CAP-VTON : Clothing-Agnostic Pre-inpainting  Virtual Try-On
 
 ## Acknowledgement
 Created by modifying [Leffa](https://github.com/franciszzj/LEFFA).
