@@ -1,5 +1,5 @@
-# VIONE
-> Vione : Virtual Try-on Model independent on input images: Ensemble Model with pre-inpainting
+# CaP-VTON
+> Clothing agnostic Pre-inpainting Virtual Try-ON
 
 ## Visualization
 ![img](https://github.com/DevChoco/VIONE/blob/main/git_img/main.png)
@@ -36,5 +36,6 @@ If you find VIONE helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
 
 
