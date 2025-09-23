@@ -1,6 +1,9 @@
 # CaP-VTON
 > Clothing agnostic Pre-inpainting Virtual Try-ON
 
+-----------
+[📖Paper](arxiv.org/abs/2509.17654) -- [⚙Code](https://github.com/DevChoco/CAP-VTON)
+
 ## Visualization
 ![img](https://github.com/DevChoco/VIONE/blob/main/git_img/main.png)
 
@@ -36,6 +39,7 @@ If you find VIONE helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
 
 
 
