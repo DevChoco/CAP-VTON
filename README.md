@@ -14,6 +14,8 @@ conda create -n vione python==3.10
 conda activate vione
 cd vione
 pip install -r requirements.txt
+
+"Run leffa_test.ipynb"
 ```
 
 ## Specifications
@@ -39,6 +41,7 @@ If you find VIONE helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
 
 
 
