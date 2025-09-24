@@ -10,9 +10,9 @@
 ## Installation
 > Create a Conda Python environment and install requirements.
 ```
-conda create -n vione python==3.10
-conda activate vione
-cd vione
+conda create -n capvton python==3.10
+conda activate capvton
+cd CAP-VTON
 pip install -r requirements.txt
 
 "Run leffa_test.ipynb"
@@ -41,6 +41,7 @@ If you find VIONE helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
 
 
 
