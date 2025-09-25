@@ -2,13 +2,14 @@
 > Clothing agnostic Pre-inpainting Virtual Try-ON
 
 -----------
-[📖Paper](https://arxiv.org/abs/2509.17654) -- [⚙Code](https://github.com/DevChoco/CAP-VTON)
+[📖Paper](https://arxiv.org/abs/2509.17654) -- [💾Code](https://github.com/DevChoco/CAP-VTON) -- [🕹️Colab](https://colab.research.google.com/drive/14cP_1sOckUrykGyg5PVZX2BoQWZ9eu34?usp=sharing)
 
 ## Visualization
-![img](https://github.com/DevChoco/VIONE/blob/main/git_img/main.png)
+![img](https://github.com/DevChoco/CAP-VTON/blob/main/git_img/main.png)
 
 ## Installation
 > Create a Conda Python environment and install requirements.
+> It runs on Linux (Ubuntu) environment..!
 ```
 conda create -n capvton python==3.10
 conda activate capvton
@@ -31,16 +32,19 @@ Relevant benchmarks can be found on [Papers with Code](https://paperswithcode.co
 
 
 ## Citation
-If you find VIONE helpful for your research, please cite our work:
+If you find CAP-VTON helpful for your research, please cite our work:
 ```
 @misc{DevChoco_VIONE_2025,
   author       = {DevChoco},
-  title        = {VIONE: Virtual Try-on Model Independent on Input Images},
+  title        = {CAP-VTON: Clothing agnostic Pre-inpainting Virtual Try-ON},
   year         = {2025},
-  howpublished = {\url{https://github.com/DevChoco/VIONE}},
+  howpublished = {\url{https://github.com/DevChoco/CAP-VTON}},
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
+
+
 
 
 
