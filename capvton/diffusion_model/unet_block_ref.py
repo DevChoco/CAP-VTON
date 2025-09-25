@@ -37,7 +37,7 @@ from diffusers.models.transformers.dual_transformer_2d import DualTransformer2DM
 from diffusers.utils import is_torch_version, logging
 from diffusers.utils.torch_utils import apply_freeu
 from einops import rearrange
-from leffa.diffusion_model.transformer_ref import Transformer2DModel
+from capvton.diffusion_model.transformer_ref import Transformer2DModel
 from torch import nn
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name

@@ -27,7 +27,7 @@ from diffusers.models.lora import LoRACompatibleConv, LoRACompatibleLinear
 from diffusers.models.modeling_utils import ModelMixin
 from diffusers.models.normalization import AdaLayerNormSingle
 from diffusers.utils import BaseOutput, deprecate, is_torch_version, USE_PEFT_BACKEND
-from leffa.diffusion_model.attention_gen import BasicTransformerBlock
+from capvton.diffusion_model.attention_gen import BasicTransformerBlock
 from torch import nn
 
 

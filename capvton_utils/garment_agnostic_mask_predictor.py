@@ -8,7 +8,7 @@ from diffusers.image_processor import VaeImageProcessor
 from PIL import Image
 from SCHP import SCHP  # type: ignore
 
-from leffa_utils.densepose_for_mask import DensePose  # type: ignore
+from capvton_utils.densepose_for_mask import DensePose  # type: ignore
 
 DENSE_INDEX_MAP = {
     "background": [0],

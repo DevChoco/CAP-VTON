@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import numpy as np
 import torch
 import torch.nn as nn
-from leffa.pipeline import LeffaPipeline
+from capvton.pipeline import LeffaPipeline
 
 
 def pil_to_tensor(images):

@@ -1,11 +1,11 @@
 import numpy as np
 from PIL import Image
-from leffa.transform import LeffaTransform
-from leffa.model import LeffaModel
-from leffa.inference import LeffaInference
-from leffa_utils.garment_agnostic_mask_predictor import AutoMasker
-from leffa_utils.densepose_predictor import DensePosePredictor
-from leffa_utils.utils import resize_and_center, get_agnostic_mask_hd, get_agnostic_mask_dc, preprocess_garment_image
+from capvton.transform import LeffaTransform
+from capvton.model import LeffaModel
+from capvton.inference import LeffaInference
+from capvton_utils.garment_agnostic_mask_predictor import AutoMasker
+from capvton_utils.densepose_predictor import DensePosePredictor
+from capvton_utils.utils import resize_and_center, get_agnostic_mask_hd, get_agnostic_mask_dc, preprocess_garment_image
 from preprocess.humanparsing.run_parsing import Parsing
 from preprocess.openpose.run_openpose import OpenPose
 import torch

@@ -4,10 +4,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from diffusers import AutoencoderKL, DDPMScheduler
 
-from leffa.diffusion_model.unet_ref import (
+from capvton.diffusion_model.unet_ref import (
     UNet2DConditionModel as ReferenceUNet,
 )
-from leffa.diffusion_model.unet_gen import (
+from capvton.diffusion_model.unet_gen import (
     UNet2DConditionModel as GenerativeUNet,
 )
 
