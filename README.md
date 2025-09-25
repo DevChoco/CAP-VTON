@@ -27,8 +27,7 @@ pip install -r requirements.txt
 ## Acknowledgement
 This work was developed by extending [Leffa](https://github.com/franciszzj/LEFFA).  
 We would like to acknowledge the contributions of the original authors.  
-For in-depth technical details, please see the [Leffa Paper](https://arxiv.org/pdf/2412.08486).  
-Relevant benchmarks can be found on [Papers with Code](https://paperswithcode.com/sota/virtual-try-on-on-viton-hd).
+For in-depth technical details, please see the [Leffa Paper](https://arxiv.org/pdf/2412.08486).
 
 
 ## Citation
@@ -42,6 +41,7 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
 
 
 
