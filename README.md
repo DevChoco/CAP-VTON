@@ -49,6 +49,3 @@ If you find CAP-VTON helpful for your research, please cite our work:
 
 
 
-
-
-
