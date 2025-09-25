@@ -9,7 +9,7 @@
 
 ## Installation
 > Create a Conda Python environment and install requirements.
-> It runs on Linux (Ubuntu) environment..!
+>> It runs on Linux (Ubuntu) environment..!
 ```
 conda create -n capvton python==3.10
 conda activate capvton
@@ -42,6 +42,7 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
 
 
 
