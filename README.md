@@ -2,14 +2,14 @@
 > Clothing agnostic Pre-inpainting Virtual Try-ON
 
 -----------
-[📖Paper](https://arxiv.org/abs/2509.17654) -- [💾Code](https://github.com/DevChoco/CAP-VTON) -- [🕹️Colab](https://colab.research.google.com/drive/14cP_1sOckUrykGyg5PVZX2BoQWZ9eu34?usp=sharing)
+[📖Paper](https://arxiv.org/abs/2509.17654) -- [💾Code](https://github.com/DevChoco/CAP-VTON) -- [🕹️Colab_Demo](https://colab.research.google.com/drive/14cP_1sOckUrykGyg5PVZX2BoQWZ9eu34?usp=sharing)
 
 ## Visualization
 ![img](https://github.com/DevChoco/CAP-VTON/blob/main/git_img/main.png)
 
 ## Installation
 > Create a Conda Python environment and install requirements.
-> It runs on Linux (Ubuntu) environment..!
+>> It runs on Linux (Ubuntu) environment..!
 ```
 conda create -n capvton python==3.10
 conda activate capvton
@@ -27,8 +27,7 @@ pip install -r requirements.txt
 ## Acknowledgement
 This work was developed by extending [Leffa](https://github.com/franciszzj/LEFFA).  
 We would like to acknowledge the contributions of the original authors.  
-For in-depth technical details, please see the [Leffa Paper](https://arxiv.org/pdf/2412.08486).  
-Relevant benchmarks can be found on [Papers with Code](https://paperswithcode.com/sota/virtual-try-on-on-viton-hd).
+For in-depth technical details, please see the [Leffa Paper](https://arxiv.org/pdf/2412.08486).
 
 
 ## Citation
@@ -42,6 +41,9 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
+
+
 
 
 
