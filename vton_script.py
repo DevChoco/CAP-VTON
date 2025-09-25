@@ -113,70 +113,7 @@ class LeffaVirtualTryOn:
 
         return final_image
 
-    def skin_test(
-        self,
-        src_image_path: str,
-        ref_image_path: str, 
-        control_type: str,
-        output_path: str = None,
-        step: int = 40,
-        seed: int = 42,
-        cross_attention_kwargs={"scale": 3},
-        vt_model_type: str = "viton_hd",
-        vt_garment_type: str = "upper_body",
-        vt_repaint: bool = False,
-        ref_acceleration: bool = False,
-        src_mask_path: str = None     
-    ):
-        """
-        이미지에서 팔과 다리의 옷을 제거하고 사실적인 피부로 인페인팅합니다.
-        Removes clothing from arms and legs in an image and inpaints with realistic skin.
-        """
-        src_image = Image.open(src_image_path).convert("RGB")
-        src_image = resize_and_center(src_image, 768, 1024)
-
-        garment_mask_img = self.mask_predictor(src_image, "overall")["mask"]
-        garment_mask_np = np.array(garment_mask_img.convert("L")) > 128
-
-        parsing_map, _ = self.parsing(src_image.resize((768, 1024)))
-        parsing_map = np.array(parsing_map)
-        limb_mask_raw = np.isin(parsing_map, [4, 5]).astype(np.uint8)
-        limb_mask_img = Image.fromarray(limb_mask_raw * 255).resize(src_image.size, Image.NEAREST)
-        limb_mask_np = np.array(limb_mask_img.convert("L")) > 128
-        
-        if vt_garment_type == "upper_body":
-            garment_mask_np = np.isin(parsing_map, [4]).astype(np.uint8)
-            hands_mask_np = np.isin(parsing_map, [14, 15]).astype(np.uint8) 
-            garment_mask_np |= hands_mask_np
-        elif vt_garment_type == "lower_body":
-            garment_mask_np = np.isin(parsing_map, [5]).astype(np.uint8)
-        else:
-            garment_mask_np = np.isin(parsing_map, [4, 5]).astype(np.uint8)
-
-        inpaint_mask_np = garment_mask_np & limb_mask_np
-        
-        kernel = np.ones((10, 10), np.uint8)  # 10px 마진용 커널
-        inpaint_mask_np_dilated = cv2.dilate(inpaint_mask_np.astype(np.uint8), kernel, iterations=1)
-        
-        inpaint_mask_img = Image.fromarray(inpaint_mask_np_dilated * 255)
-
-        if not np.any(inpaint_mask_np):
-            if output_path:
-                src_image.save(output_path)
-            return src_image, Image.fromarray(np.zeros_like(inpaint_mask_np, dtype=np.uint8) * 255)
-
-        final_image = self.generate_skin(
-            src_image=src_image,
-            inpaint_mask_img=inpaint_mask_img,
-            step=step,
-            seed=seed
-        )
-
-        agnostic_image = final_image
-
-        return final_image, inpaint_mask_img, parsing_map
-
-    def leffa_predict(
+    def capvton_predict(
         self,
         src_image_path,
         ref_image_path,
