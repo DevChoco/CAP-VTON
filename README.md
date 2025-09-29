@@ -38,9 +38,10 @@ If you find CAP-VTON helpful for your research, please cite our work:
   title        = {CAP-VTON: Clothing agnostic Pre-inpainting Virtual Try-ON},
   year         = {2025},
   howpublished = {\url{https://github.com/DevChoco/CAP-VTON}},
-  note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
+  note         = {GitHub repository, MIT License},
 }
 ```
+
 
 
 
