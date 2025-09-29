@@ -16,7 +16,7 @@ conda activate capvton
 cd CAP-VTON
 pip install -r requirements.txt
 
-"Run leffa_test.ipynb"
+"Run Start_CaP_VTON.ipynb"
 ```
 
 ## Specifications
@@ -41,6 +41,7 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License, latest commit 3da95fa (2025-08-13)},
 }
 ```
+
 
 
 
