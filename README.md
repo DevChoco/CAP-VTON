@@ -33,7 +33,7 @@ For in-depth technical details, please see the [Leffa Paper](https://arxiv.org/p
 ## Citation
 If you find CAP-VTON helpful for your research, please cite our work:
 ```
-@misc{DevChoco_VIONE_2025,
+@misc{DevChoco_CAP-VTON_2025,
   author       = {DevChoco},
   title        = {CAP-VTON: Clothing agnostic Pre-inpainting Virtual Try-ON},
   year         = {2025},
@@ -41,6 +41,7 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License},
 }
 ```
+
 
 
 
