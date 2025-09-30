@@ -13,7 +13,7 @@ from diffusers import StableDiffusionControlNetInpaintPipeline, ControlNetModel
 import cv2 
 import os
 
-class LeffaVirtualTryOn:
+class CAPVirtualTryOn:
     def __init__(self, ckpt_dir: str):
         self.mask_predictor = AutoMasker(
             densepose_path=f"{ckpt_dir}/densepose",
