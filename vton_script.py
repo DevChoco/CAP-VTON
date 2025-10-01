@@ -154,7 +154,10 @@ class CAPVirtualTryOn:
         else:
             garment_mask_np = np.isin(parsing_map, [4, 5]).astype(np.uint8)
 
-        inpaint_mask_np = garment_mask_np & limb_mask_np
+        upper_body_mask_np = np.isin(parsing_map, [4]).astype(np.uint8)  # upper body
+        arms_mask_np = np.isin(parsing_map, [14, 15]).astype(np.uint8)  # lower arms
+        hands_mask_np = np.isin(parsing_map, [20, 21]).astype(np.uint8)  # hand
+        inpaint_mask_np = upper_body_mask_np | arms_mask_np | hands_mask_np 
 
         kernel = np.ones((10, 10), np.uint8)  # 10px 마진용 커널
         inpaint_mask_np_dilated = cv2.dilate(inpaint_mask_np.astype(np.uint8), kernel, iterations=1)
