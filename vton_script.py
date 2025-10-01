@@ -72,7 +72,6 @@ class CAPVirtualTryOn:
         seed: int = 42
     ) -> Image.Image:
         """
-        주어진 마스크 영역에 사실적인 피부를 인페인팅합니다.
         Inpaints realistic skin in the given masked area using a dedicated skin model.
         """
         
@@ -87,7 +86,7 @@ class CAPVirtualTryOn:
             openpose_image = openpose_result
         
         if not isinstance(openpose_image, Image.Image):
-            raise TypeError(f"OpenPose에서 반환된 control image가 유효하지 않습니다: {type(openpose_image)}")
+            raise TypeError(f"The control image returned from OpenPose is invalid: {type(openpose_image)}")
         
         generator = torch.Generator(device="cuda").manual_seed(seed)
 
@@ -159,7 +158,7 @@ class CAPVirtualTryOn:
         hands_mask_np = np.isin(parsing_map, [20, 21]).astype(np.uint8)  # hand
         inpaint_mask_np = upper_body_mask_np | arms_mask_np | hands_mask_np 
 
-        kernel = np.ones((10, 10), np.uint8)  # 10px 마진용 커널
+        kernel = np.ones((10, 10), np.uint8)  # 10px margin
         inpaint_mask_np_dilated = cv2.dilate(inpaint_mask_np.astype(np.uint8), kernel, iterations=1)
 
         inpaint_mask_img = Image.fromarray(inpaint_mask_np_dilated * 255)
