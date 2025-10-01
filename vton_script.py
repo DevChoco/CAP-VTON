@@ -27,9 +27,10 @@ class CAPVirtualTryOn:
             atr_path=f"{ckpt_dir}/humanparsing/parsing_atr.onnx",
             lip_path=f"{ckpt_dir}/humanparsing/parsing_lip.onnx",
         )
-        # self.openpose = OpenPose(
-        #     body_model_path=f"{ckpt_dir}/openpose/body_pose_model.pth",
-        # )
+        
+        self.openpose = OpenPose(
+            body_model_path=f"{ckpt_dir}/openpose/body_pose_model.pth",
+        )
 
         vt_model_hd = LeffaModel(
             pretrained_model_name_or_path=f"{ckpt_dir}/stable-diffusion-inpainting",
