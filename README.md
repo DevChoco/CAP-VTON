@@ -34,7 +34,7 @@ For in-depth technical details, please see the [Leffa Paper](https://arxiv.org/p
 If you find CAP-VTON helpful for your research, please cite our work:
 ```
 @misc{DevChoco_CAP-VTON_2025,
-  author       = {Sehyeon Kim, Jiwoo Lee, and Hye Jun Lee, from DevChoco},
+  author       = {Sehyun Kim, Jiwoo Lee, and Hye Jun Lee, from DevChoco},
   journal      = {arXiv preprint arxiv.org:2509.17654},
   title        = {CAP-VTON: Clothing agnostic Pre-inpainting Virtual Try-ON},
   year         = {2025},
@@ -42,6 +42,7 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License},
 }
 ```
+
 
 
 
