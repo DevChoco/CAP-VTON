@@ -1,4 +1,4 @@
-# CaP-VTON
+# 🧢 CAP-VTON
 > Clothing agnostic Pre-inpainting Virtual Try-ON
 
 -----------
@@ -42,6 +42,7 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License},
 }
 ```
+
 
 
 
