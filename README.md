@@ -2,7 +2,7 @@
 > Clothing agnostic Pre-inpainting Virtual Try-ON
 
 -----------
-[📖Paper](https://arxiv.org/abs/2509.17654) -- [💾Code](https://github.com/DevChoco/CAP-VTON) -- [🕹️Colab_Demo](https://colab.research.google.com/drive/14cP_1sOckUrykGyg5PVZX2BoQWZ9eu34?usp=sharing)
+[📖Paper](https://www.mdpi.com/3612740) -- [💾Code](https://github.com/DevChoco/CAP-VTON) -- [🕹️Colab_Demo](https://colab.research.google.com/drive/14cP_1sOckUrykGyg5PVZX2BoQWZ9eu34?usp=sharing)
 
 ## Visualization
 ![img](https://github.com/DevChoco/CAP-VTON/blob/main/git_img/main.png)
@@ -42,6 +42,7 @@ If you find CAP-VTON helpful for your research, please cite our work:
   note         = {GitHub repository, MIT License},
 }
 ```
+
 
 
 
