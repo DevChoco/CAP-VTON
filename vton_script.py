@@ -15,6 +15,8 @@ import os
 
 class CAPVirtualTryOn:
     def __init__(self, ckpt_dir: str):
+        self.ckpt_dir = ckpt_dir
+
         self.mask_predictor = AutoMasker(
             densepose_path=f"{ckpt_dir}/densepose",
             schp_path=f"{ckpt_dir}/schp",
@@ -27,42 +29,64 @@ class CAPVirtualTryOn:
             atr_path=f"{ckpt_dir}/humanparsing/parsing_atr.onnx",
             lip_path=f"{ckpt_dir}/humanparsing/parsing_lip.onnx",
         )
-        
+
         self.openpose = OpenPose(
             body_model_path=f"{ckpt_dir}/openpose/body_pose_model.pth",
         )
 
-        vt_model_hd = LeffaModel(
-            pretrained_model_name_or_path=f"{ckpt_dir}/stable-diffusion-inpainting",
-            pretrained_model=f"{ckpt_dir}/virtual_tryon.pth",
-            dtype="float16",
-        )
-        self.vt_inference_hd = LeffaInference(model=vt_model_hd)
+        # Lazy-loaded models (only one at a time on GPU to fit 8GB VRAM)
+        self._vt_inference_hd = None
+        self._vt_inference_dc = None
+        self._skin_pipe = None
 
-        self.skin_model = LeffaModel(
-            pretrained_model_name_or_path=f"{ckpt_dir}/stable-diffusion-inpainting",
-            pretrained_model=f"{ckpt_dir}/virtual_tryon.pth",
-            dtype="float16",
-        )
-        self.skin_inference = LeffaInference(model=self.skin_model)
+    def _free_gpu(self):
+        """Free GPU memory before loading the next large model."""
+        if self._skin_pipe is not None:
+            self._skin_pipe = self._skin_pipe.to("cpu")
+        if self._vt_inference_hd is not None:
+            self._vt_inference_hd.model.to("cpu")
+        if self._vt_inference_dc is not None:
+            self._vt_inference_dc.model.to("cpu")
+        torch.cuda.empty_cache()
 
-        vt_model_dc = LeffaModel(
-            pretrained_model_name_or_path=f"{ckpt_dir}/stable-diffusion-inpainting",
-            pretrained_model=f"{ckpt_dir}/virtual_tryon_dc.pth",
-            dtype="float16",
-        )
-        self.vt_inference_dc = LeffaInference(model=vt_model_hd)
+    def _get_skin_pipe(self):
+        if self._skin_pipe is None:
+            controlnet = ControlNetModel.from_pretrained(
+                "lllyasviel/sd-controlnet-openpose", torch_dtype=torch.float16
+            )
+            self._skin_pipe = StableDiffusionControlNetInpaintPipeline.from_single_file(
+                f"{self.ckpt_dir}/majicmixRealistic_v7.safetensors",
+                controlnet=controlnet,
+                torch_dtype=torch.float16,
+                safety_checker=None,
+            )
+        self._free_gpu()
+        self._skin_pipe = self._skin_pipe.to("cuda")
+        return self._skin_pipe
 
-        # majicmix realistic skin model - diffusers pipeline
-        controlnet = ControlNetModel.from_pretrained(
-            "lllyasviel/sd-controlnet-openpose", torch_dtype=torch.float16
-        )
-        self.skin_pipe = StableDiffusionControlNetInpaintPipeline.from_single_file(
-            f"{ckpt_dir}/majicmixRealistic_v7.safetensors",
-            controlnet=controlnet,
-            torch_dtype=torch.float16,
-            safety_checker=None
-        ).to("cuda")
+    def _get_vt_inference(self, model_type: str):
+        if model_type == "viton_hd":
+            if self._vt_inference_hd is None:
+                vt_model_hd = LeffaModel(
+                    pretrained_model_name_or_path=f"{self.ckpt_dir}/stable-diffusion-inpainting",
+                    pretrained_model=f"{self.ckpt_dir}/virtual_tryon.pth",
+                    dtype="float16",
+                )
+                self._vt_inference_hd = LeffaInference(model=vt_model_hd)
+            self._free_gpu()
+            self._vt_inference_hd.model.to("cuda")
+            return self._vt_inference_hd
+        else:
+            if self._vt_inference_dc is None:
+                vt_model_dc = LeffaModel(
+                    pretrained_model_name_or_path=f"{self.ckpt_dir}/stable-diffusion-inpainting",
+                    pretrained_model=f"{self.ckpt_dir}/virtual_tryon_dc.pth",
+                    dtype="float16",
+                )
+                self._vt_inference_dc = LeffaInference(model=vt_model_dc)
+            self._free_gpu()
+            self._vt_inference_dc.model.to("cuda")
+            return self._vt_inference_dc
 
     def generate_skin(
         self,
@@ -71,10 +95,7 @@ class CAPVirtualTryOn:
         step: int = 20,
         seed: int = 42
     ) -> Image.Image:
-        """
-        Inpaints realistic skin in the given masked area using a dedicated skin model.
-        """
-        
+       
         skin_prompt = "Wearing Held Tight Short Sleeve Shirt, high quality skin, realistic, high quality"
         negative_prompt = "Blurry, low quality, artifacts, deformed, ugly, , texture, watermark, text, bad anatomy, extra limbs, face, hands, fingers"
 
@@ -89,8 +110,9 @@ class CAPVirtualTryOn:
             raise TypeError(f"The control image returned from OpenPose is invalid: {type(openpose_image)}")
         
         generator = torch.Generator(device="cuda").manual_seed(seed)
+        skin_pipe = self._get_skin_pipe()
 
-        generated_image = self.skin_pipe(
+        generated_image = skin_pipe(
             prompt=skin_prompt,
             negative_prompt=negative_prompt,
             image=src_image,
@@ -191,6 +213,7 @@ class CAPVirtualTryOn:
             if src_mask_path:
                 mask.save(src_mask_path)
         else:
+            agnostic_np = np.array(agnostic_image)
             mask = Image.fromarray(np.ones_like(agnostic_np, dtype=np.uint8) * 255)
     
         agnostic_np = np.array(agnostic_image)
@@ -210,7 +233,7 @@ class CAPVirtualTryOn:
         }
         data = transform(data)
     
-        inference = self.vt_inference_hd if vt_model_type == "viton_hd" else self.vt_inference_dc
+        inference = self._get_vt_inference(vt_model_type)
         
         garment_prompt = "High quality skin, lifelike details, realistic textures, full masking range"
         negative_prompt = "distorted, blurry, low quality, artifact, background, clothes"
